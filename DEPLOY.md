@@ -1,29 +1,30 @@
-# Publish under navidotmy/bunyibaca
+# BunyiBaca — GitHub Pages publication
 
-**Repo not yet created:** The connected GitHub integration can access and write to repositories but cannot create a new GitHub repository or change its Pages settings. Therefore this package cannot be truthfully described as live on GitHub yet.
+Repository: https://github.com/navidotmy/bunyibaca
+Target public site: https://navidotmy.github.io/bunyibaca/
 
-## Android phone / GitHub Codespaces path
+## Current status (30 October 2026)
+All app source files, the 96-lesson curriculum, 336 prototype audio files, tests, and the workflow are committed to `main`. The automated build and 5/5 tests have passed.
 
-1. Open https://github.com/new while signed in as `navidotmy`.
-2. Name the repository `bunyibaca`. Choose **Public**, default branch **main**. Create the empty repository; do not initialise with README if using the command below.
-3. In a GitHub Codespace or on your computer, upload/extract the supplied `bunyibaca-pwa.zip` so that `index.html` is at the repository root.
-4. From the extracted folder:
+The first Pages deployment was blocked because GitHub Pages is **not yet enabled** for this repository. Automatic enablement via the workflow was denied with `Resource not accessible by integration`. Only the repository owner can complete the one-time Pages setup.
 
-```bash
-git init
-git branch -M main
-git add .
-git commit -m "Initial BunyiBaca reading PWA"
-git remote add origin https://github.com/navidotmy/bunyibaca.git
-git push -u origin main
-```
+## One-time action to activate the website
+1. Open https://github.com/navidotmy/bunyibaca/settings/pages while logged into `navidotmy`.
+2. Under **Build and deployment**, set **Source** to **GitHub Actions** (rather than "Deploy from a branch").
+3. Return to https://github.com/navidotmy/bunyibaca/actions/workflows/pages.yml
+4. Select **Run workflow** on branch `main`, and run it. Alternatively, push any commit to `main`.
+5. Confirm that the latest run finishes with a green success check.
+6. Then open https://navidotmy.github.io/bunyibaca/ and test installation (Chrome: Install app/Add to Home screen; supported iPhone Safari: Share → Add to Home Screen).
 
-5. GitHub → **Settings → Pages → Build and deployment → GitHub Actions**.
-6. Open **Actions** and confirm `Test and deploy BunyiBaca` succeeded.
-7. Only after the successful run, visit `https://navidotmy.github.io/bunyibaca/` and install using browser **Add to Home Screen**.
+## What the automated workflow does
+- Checks out the complete editable source code.
+- Generates missing experimental MP3 clips only if needed.
+- Executes `npm test` (all five checks).
+- Uploads and deploys the static PWA to GitHub Pages.
 
-If GitHub asks you to authenticate Git push, use Codespaces with the repository already signed in. Do not enter your password into the PWA or share credentials with ChatGPT.
+## Public beta limitations
+This is a public educational **beta**, not a commercial production launch. Synthetic audio has not been verified by Malay phonics specialists. The Premium access gate is demonstrative: there is no payment gateway, secure paid entitlement or private content delivery. Profiles and teacher rosters are stored in the browser; no accounts or cross-device school sync are connected. Do not enter sensitive child data into a shared device.
 
-## Security / licensing before a paid launch
+For local testing: `npm test`, then `python3 -m http.server 8080`.
 
-This package is a functional **educational beta**, not a merchant-connected product. Real subscriptions require a payment service, a secure server, verified entitlements and non-public premium content distribution. The prototype includes 336 synthetic MP3 pronunciations that are not professionally reviewed and must be replaced or validated before classroom/commercial claims.
+The Github Pages workflow may run again if you change source files. It does not require manually uploading or unzipping the project.
