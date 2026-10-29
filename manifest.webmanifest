@@ -1,0 +1,16 @@
+{
+  "id":"./",
+  "name":"BunyiBaca — Fonik Bahasa Melayu",
+  "short_name":"BunyiBaca",
+  "description":"Dengar bunyi, gabung bunyi, pandai membaca!",
+  "start_url":"./",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#f4fbf7",
+  "theme_color":"#f4fbf7",
+  "lang":"ms",
+  "icons":[
+    {"src":"./assets/icon192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"./assets/icon512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
