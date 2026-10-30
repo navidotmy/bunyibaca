@@ -1,0 +1,59 @@
+name: Produce Malay AI voice audition clips (private review)
+on:
+  workflow_dispatch:
+    inputs:
+      voice:
+        description: 'Choose which natural Malaysian Malay voice to audition'
+        required: true
+        default: 'ms-MY-YasminNeural'
+        type: choice
+        options:
+          - ms-MY-YasminNeural
+          - ms-MY-OsmanNeural
+      clip_limit:
+        description: 'Maximum clips to generate (default 16, maximum 1000)'
+        required: true
+        default: '16'
+        type: string
+      full_catalog:
+        description: 'Include the whole catalog, not just the 18-item pilot shortlist'
+        required: true
+        default: false
+        type: boolean
+permissions:
+  contents: read
+jobs:
+  create-review-pack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate secrets and request budget
+        env:
+          AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+          AZURE_SPEECH_REGION: ${{ secrets.AZURE_SPEECH_REGION }}
+          LIMIT: ${{ inputs.clip_limit }}
+        run: |
+          test -n "$AZURE_SPEECH_KEY" || { echo 'Missing repository secret AZURE_SPEECH_KEY'; exit 1; }
+          test -n "$AZURE_SPEECH_REGION" || { echo 'Missing repository secret AZURE_SPEECH_REGION'; exit 1; }
+          [[ "$LIMIT" =~ ^[0-9]+$ ]] && [ "$LIMIT" -gt 0 ] && [ "$LIMIT" -le 1000 ] || { echo 'clip_limit must be 1..1000'; exit 1; }
+      - name: Generate AI voice samples for expert review
+        env:
+          AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+          AZURE_SPEECH_REGION: ${{ secrets.AZURE_SPEECH_REGION }}
+          VOICE: ${{ inputs.voice }}
+          LIMIT: ${{ inputs.clip_limit }}
+          FULL: ${{ inputs.full_catalog }}
+        run: |
+          args=( --voice "$VOICE" --limit "$LIMIT" --confirm-billing )
+          if [ "$FULL" = 'true' ]; then args+=(--all); fi
+          python3 tools/generate_azure_voice.py "${args[@]}"
+      - name: Downloadable voice-review pack (NOT automatically published)
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'BunyiBaca-${{ inputs.voice }}-unreviewed'
+          path: voice-review/
+          retention-days: 7
+          if-no-files-found: error

@@ -1,9 +1,10 @@
-node_modules/
+# BunyiBaca protected credentials and unpublished voice auditions
 .env
 .env.*
+!.env.example
+voice-review/
+ai-review/
 *.key
 *.pem
-.DS_Store
 __pycache__/
-playwright-report/
-test-results/
+.DS_Store
