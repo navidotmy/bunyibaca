@@ -236,3 +236,8 @@ Versi 1.0 · Sumber kandungan asal · **Memerlukan semakan pakar fonik Bahasa Me
 - [ ] Cerita dan soalan kefahaman telah melalui semakan usia dan kesesuaian budaya.
 - [ ] Ujian bacaan perkataan baharu dilakukan secara bebas daripada gambar.
 - [ ] Perubahan silibus direkod dan ujian pembelajaran pra/pasca dijalankan.
+## BunyiBaca Siri Bacaan — additional digital reader (v2)
+
+Eight original graded digital books are included separately from the existing 12 learning worlds (96 lessons). Each book has 8 progressively arranged practice pages (sound awareness, blending, word ladders, word reading, contrasts, sentence reading, a shared original story and a formative check). Three books (24 pages) are free, in addition to the 32 existing free lessons. Book pages attempted are **not** classified as mastered. Original editorial source lives in `tools/make_series.py`; generated runtime curriculum is in `reading-series.mjs`.
+
+This material is not a transcription, translation, screenshot set, page-for-page adaptation, or audiovisual derivative of any third-party reading book. Systematic phonics, syllable blending and graduated decodable reading are general teaching methods; BunyiBaca has its own sequence and authored content. Specialist review and independent assessment remain required.

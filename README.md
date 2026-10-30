@@ -1,3 +1,5 @@
+> Version 2: Includes independently authored 8-book sound-first graded reader (64 pages, 24 free). This is **not** Bacalah Anakku, an adaptation, or an authorised reproduction. See ORIGINAL-READING-SERIES.md.
+
 # BunyiBaca — Fonik Bahasa Melayu PWA
 
 An original, mobile-first, offline-capable Malay reading PWA for children aged 4–8, with separate parent and teacher screens.
